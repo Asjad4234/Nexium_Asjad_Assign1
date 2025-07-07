@@ -39,7 +39,9 @@ const QuoteGenerator = () => {
         if (!selected) {
             setQuotes([]);
         } else {
-            setQuotes(getRandomQuotes(quotesDatabase[selected]));
+            if (selected in quotesDatabase) {
+              setQuotes(getRandomQuotes(quotesDatabase[selected as keyof typeof quotesDatabase]));
+            }
         }
 
         setLoading(false);
@@ -48,7 +50,10 @@ const QuoteGenerator = () => {
 
     const handleNewQuotes = () => {
         const selected = findTopic(topic);
-        setQuotes(getRandomQuotes(quotesDatabase[selected]));
+        if (selected in quotesDatabase) {
+          setQuotes(getRandomQuotes(quotesDatabase[selected as keyof typeof quotesDatabase]));
+        }
+
     };
 
     return (
