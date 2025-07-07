@@ -40,27 +40,20 @@ Built with **Next.js 15**, styled using **Tailwind CSS**, and deployed on **Verc
 To run the project locally:
 
 1. Clone the repository:
-```bash
-git clone https://github.com/Asjad4234/Nexium_Asjad_Assign1.git ```
+git clone https://github.com/Asjad4234/Nexium_Asjad_Assign1.git
 
 
 
 2. Navigate to the project:
-```bash
-cd Nexium_Asjad_Assign1/assignment1 ```
+cd Nexium_Asjad_Assign1/assignment1
 
 
 3. Install dependencies:
-```bash
-npm install ```
+npm install 
 
 
 4. Run the development server:
-```bash
-npm run dev ```
+npm run dev
 
 
-6. Open http://localhost:3000 in your browser to see it live. ```
-
-
-Made by @Asjad4234
+5. Open http://localhost:3000 in your browser to see it live.
