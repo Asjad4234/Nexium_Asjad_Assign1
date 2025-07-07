@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 
 
 const QuoteGenerator = () => {
+    type Topic = keyof typeof quotesDatabase;
     const [topic, setTopic] = useState('');
     const [quotes, setQuotes] = useState<{ text: string; author: string }[]>([]);
     const [loading, setLoading] = useState(false);
@@ -17,13 +18,14 @@ const QuoteGenerator = () => {
     };
     // Map of keywords to topics for better search flexibility
 
-    const findTopic = (search: string) => {
-        const lower = search.toLowerCase().trim();
-        const topics = Object.keys(quotesDatabase);
+    const findTopic = (search: string): Topic | null => {
+    const lower = search.toLowerCase().trim();
+    const topics = Object.keys(quotesDatabase) as Topic[];
 
-        if (topics.includes(lower)) return lower;
-        return topics.find(t => t.includes(lower) || lower.includes(t)) || null;
-    };
+    if (topics.includes(lower as Topic)) return lower as Topic;
+    return topics.find(t => t.includes(lower)) || null;
+};
+
 
 
     const handleSearch = async (e?: React.FormEvent) => {
@@ -39,22 +41,21 @@ const QuoteGenerator = () => {
         if (!selected) {
             setQuotes([]);
         } else {
-            if (selected in quotesDatabase) {
-              setQuotes(getRandomQuotes(quotesDatabase[selected as keyof typeof quotesDatabase]));
-            }
-        }
+            setQuotes(getRandomQuotes(quotesDatabase[selected]));
+        }    
 
         setLoading(false);
     };
 
 
     const handleNewQuotes = () => {
-        const selected = findTopic(topic);
-        if (selected in quotesDatabase) {
-          setQuotes(getRandomQuotes(quotesDatabase[selected as keyof typeof quotesDatabase]));
-        }
+    const selected = findTopic(topic);
 
-    };
+    if (selected) {
+        setQuotes(getRandomQuotes(quotesDatabase[selected]));
+    }
+};
+
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
